@@ -759,7 +759,7 @@ namespace Launchpad.Launcher.Handlers.Protocols.Manifest
 		/// <returns>The remote game version.</returns>
 		protected virtual Version GetRemoteGameVersion()
 		{
-			var remoteVersionPath = $"{this.Configuration.RemoteAddress}/game/{this.Configuration.SystemTarget}/bin/GameVersion.txt";
+			var remoteVersionPath = $"{this.Configuration.RemoteAddress}/application/{this.Configuration.SystemTarget}/bin/GameVersion.txt";
 			var remoteVersion = ReadRemoteFile(remoteVersionPath).RemoveLineSeparatorsAndNulls();
 
 			if (Version.TryParse(remoteVersion, out var version))

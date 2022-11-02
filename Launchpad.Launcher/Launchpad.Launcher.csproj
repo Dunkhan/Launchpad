@@ -9,6 +9,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <LangVersion>7.1</LangVersion>
     <Prefer32bit>true</Prefer32bit>
+    <AssemblyVersion>2022.11.01.0</AssemblyVersion>
   </PropertyGroup>
 
   <!-- Workaround for https://github.com/dotnet/roslyn-project-system/issues/1739 -->

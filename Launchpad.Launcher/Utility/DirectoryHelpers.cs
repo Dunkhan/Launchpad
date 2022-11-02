@@ -149,7 +149,7 @@ namespace Launchpad.Launcher.Utility
 		public static string GetRemoteGamePath()
 		{
 			var config = ConfigHandler.Instance.Configuration;
-			return $"{config.RemoteAddress}/game/{config.SystemTarget}/bin/";
+			return $"{config.RemoteAddress}/application/{config.SystemTarget}/bin/";
 		}
 	}
 }

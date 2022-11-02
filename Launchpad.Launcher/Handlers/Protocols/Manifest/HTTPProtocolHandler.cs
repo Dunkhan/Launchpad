@@ -96,7 +96,7 @@ namespace Launchpad.Launcher.Handlers.Protocols.Manifest
 		/// <inheritdoc />
 		public override bool IsPlatformAvailable(ESystemTarget platform)
 		{
-			var remote = $"{this.Configuration.RemoteAddress}/game/{platform}/.provides";
+			var remote = $"{this.Configuration.RemoteAddress}/application/{platform}/.provides";
 
 			return DoesRemoteDirectoryOrFileExist(remote);
 		}
