@@ -205,7 +205,8 @@ namespace Launchpad.Launcher.Interface
 							{
 								// All checks passed, so we can offer to launch the game.
 								Log.Info("All checks passed. Game can be launched.");
-								SetLauncherMode(ELauncherMode.Launch, false);
+								SetLauncherMode(ELauncherMode.Launch, true);
+								this.Game.LaunchGame();
 							}
 						}
 					}
@@ -243,7 +244,7 @@ namespace Launchpad.Launcher.Interface
 		{
 			Log.Info("This instance is the first start of the application in this folder.");
 
-			var text = LocalizationCatalog.GetString
+			/*var text = LocalizationCatalog.GetString
 			(
 				"This appears to be the first time you're starting the launcher.\n" +
 				"Is this the location where you would like to install the game?"
@@ -271,7 +272,8 @@ namespace Launchpad.Launcher.Interface
 					Log.Info("User declined installation in this directory. Exiting...");
 					Environment.Exit(2);
 				}
-			}
+			}*/
+			this.TagfileService.CreateLauncherTagfile();
 		}
 
 		private void LoadBanner()

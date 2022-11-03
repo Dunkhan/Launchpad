@@ -146,8 +146,8 @@ namespace Launchpad.Utilities.Handlers
 			return
 				filePath.EndsWith(".install") ||
 		        filePath.EndsWith(".update") ||
-		        filePath.EndsWith("GameManifest.txt") ||
-				filePath.EndsWith("GameManifest.checksum");
+		        filePath.EndsWith("Manifest.txt") ||
+				filePath.EndsWith("Manifest.checksum");
 		}
 	}
 }

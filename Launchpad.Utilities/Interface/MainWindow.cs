@@ -82,7 +82,7 @@ namespace Launchpad.Utilities.Interface
 		{
 			var targetDirectory = this.FolderChooser.Filename;
 
-			if (!Directory.GetFiles(targetDirectory).Any(s => s.Contains("GameVersion.txt")))
+			if (!Directory.GetFiles(targetDirectory).Any(s => s.Contains("Version.txt")))
 			{
 				var dialog = new MessageDialog
 				(
@@ -111,7 +111,7 @@ namespace Launchpad.Utilities.Interface
 				}
 			}
 
-			await GenerateManifestAsync(EManifestType.Game);
+			await GenerateManifestAsync(EManifestType.Application);
 		}
 
 		private async void OnGenerateLaunchpadManifestButtonClicked(object sender, EventArgs e)

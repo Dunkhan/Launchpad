@@ -53,12 +53,12 @@ namespace Launchpad.Launcher.Services
 					return gameVersion;
 				}
 
-				Log.Warn("Could not parse local game version. Contents: " + rawGameVersion);
+				Log.Warn("Could not parse local version. Contents: " + rawGameVersion);
 				return new Version("0.0.0");
 			}
 			catch (IOException ioex)
 			{
-				Log.Warn("Could not read local game version (IOException): " + ioex.Message);
+				Log.Warn("Could not read local version (IOException): " + ioex.Message);
 				return null;
 			}
 		}

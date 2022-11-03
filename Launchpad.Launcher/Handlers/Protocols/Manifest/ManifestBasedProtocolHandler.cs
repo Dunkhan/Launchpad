@@ -120,8 +120,8 @@ namespace Launchpad.Launcher.Handlers.Protocols.Manifest
 				{
 					RefreshModuleManifest(EModule.Game);
 
-					manifest = this.FileManifestHandler.GetManifest(EManifestType.Game, false);
-					oldManifest = this.FileManifestHandler.GetManifest(EManifestType.Game, true);
+					manifest = this.FileManifestHandler.GetManifest(EManifestType.Application, false);
+					oldManifest = this.FileManifestHandler.GetManifest(EManifestType.Application, true);
 					break;
 				}
 				default:
@@ -293,7 +293,7 @@ namespace Launchpad.Launcher.Handlers.Protocols.Manifest
 				{
 					RefreshModuleManifest(EModule.Game);
 
-					moduleManifest = this.FileManifestHandler.GetManifest(EManifestType.Game, false);
+					moduleManifest = this.FileManifestHandler.GetManifest(EManifestType.Application, false);
 					break;
 				}
 				default:
@@ -759,7 +759,7 @@ namespace Launchpad.Launcher.Handlers.Protocols.Manifest
 		/// <returns>The remote game version.</returns>
 		protected virtual Version GetRemoteGameVersion()
 		{
-			var remoteVersionPath = $"{this.Configuration.RemoteAddress}/application/{this.Configuration.SystemTarget}/bin/GameVersion.txt";
+			var remoteVersionPath = $"{this.Configuration.RemoteAddress}/application/{this.Configuration.SystemTarget}/bin/Version.txt";
 			var remoteVersion = ReadRemoteFile(remoteVersionPath).RemoveLineSeparatorsAndNulls();
 
 			if (Version.TryParse(remoteVersion, out var version))

@@ -107,7 +107,7 @@ namespace Launchpad.Launcher.Utility
 		public static string GetLocalGameDirectory()
 		{
 			var config = ConfigHandler.Instance.Configuration;
-			return Path.Combine(GetLocalLauncherDirectory(), "Game", config.SystemTarget.ToString());
+			return Path.Combine(GetLocalLauncherDirectory(), "Application", config.SystemTarget.ToString());
 		}
 
 		/// <summary>
@@ -116,7 +116,7 @@ namespace Launchpad.Launcher.Utility
 		/// <returns>The game version path.</returns>
 		public static string GetLocalGameVersionPath()
 		{
-			return Path.Combine(GetLocalGameDirectory(), "GameVersion.txt");
+			return Path.Combine(GetLocalGameDirectory(), "Version.txt");
 		}
 
 		/// <summary>

@@ -40,6 +40,6 @@ namespace Launchpad.Common.Enums
 		/// <summary>
 		/// A game manifest.
 		/// </summary>
-		Game = 2
+		Application = 2
 	}
 }

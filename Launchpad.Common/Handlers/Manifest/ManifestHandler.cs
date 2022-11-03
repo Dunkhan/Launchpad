@@ -80,7 +80,7 @@ namespace Launchpad.Common.Handlers.Manifest
 		{
 			switch (manifestType)
 			{
-				case EManifestType.Game:
+				case EManifestType.Application:
 				case EManifestType.Launchpad:
 				{
 					lock (this.ManifestsLock)
