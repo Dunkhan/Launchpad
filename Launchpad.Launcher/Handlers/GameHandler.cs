@@ -24,7 +24,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
-
+using System.Threading.Tasks;
 using Launchpad.Common;
 using Launchpad.Launcher.Configuration;
 using Launchpad.Launcher.Handlers.Protocols;
@@ -85,6 +85,8 @@ namespace Launchpad.Launcher.Handlers
 		private readonly PatchProtocolHandler Patch;
 
 		private readonly GameArgumentService GameArgumentService = new GameArgumentService();
+
+		private Process gameProcess;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="GameHandler"/> class.
@@ -204,28 +206,13 @@ namespace Launchpad.Launcher.Handlers
 
 				Log.Info($"Launching game. \n\tExecutable path: {gameStartInfo.FileName}");
 
-				var gameProcess = new Process
+				gameProcess = new Process
 				{
 					StartInfo = gameStartInfo,
 					EnableRaisingEvents = true
 				};
 
-				gameProcess.Exited += (sender, args) =>
-				{
-					if (gameProcess.ExitCode != 0)
-					{
-						Log.Info
-						(
-							$"The game exited with an exit code of {gameProcess.ExitCode}. " +
-							"There may have been issues during runtime, or the game may not have started at all."
-						);
-					}
-
-					OnGameExited(gameProcess.ExitCode);
-
-					// Manual disposing
-					gameProcess.Dispose();
-				};
+				gameProcess.Exited += this.OnCrash;
 
 				// Make sure the game executable is flagged as such on Unix
 				if (PlatformHelpers.IsRunningOnUnix())
@@ -234,11 +221,17 @@ namespace Launchpad.Launcher.Handlers
 				}
 
 				gameProcess.Start();
+				Task.Delay(5000).ContinueWith(t =>
+				{
+					gameProcess.Exited -= this.OnCrash;
+					Process.GetCurrentProcess().Kill();
+				});
 			}
 			catch (FileNotFoundException fex)
 			{
 				Log.Warn($"Game launch failed (FileNotFoundException): {fex.Message}");
-				Log.Warn("If the game executable is there, try overriding the executable name in the configuration file.");
+				Log.Warn(
+					"If the game executable is there, try overriding the executable name in the configuration file.");
 
 				OnGameLaunchFailed();
 			}
@@ -248,6 +241,28 @@ namespace Launchpad.Launcher.Handlers
 
 				OnGameLaunchFailed();
 			}
+		}
+
+		/// <summary>
+		/// Receiver function for game exit event.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">E.</param>
+		private void OnCrash(object sender, EventArgs e)
+		{
+			if (gameProcess.ExitCode != 0)
+			{
+				Log.Info
+				(
+					$"The game exited with an exit code of {gameProcess.ExitCode}. " +
+					"There may have been issues during runtime, or the game may not have started at all."
+				);
+			}
+
+			OnGameExited(gameProcess.ExitCode);
+
+			// Manual disposing
+			gameProcess.Dispose();
 		}
 
 		/// <summary>
