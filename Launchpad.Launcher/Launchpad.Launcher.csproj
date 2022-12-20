@@ -26,7 +26,7 @@
   <ItemGroup>
     <PackageReference Include="Config.Net" Version="4.13.7" />
     <PackageReference Include="GtkSharp" Version="3.22.25.24" />
-    <PackageReference Include="NLog" Version="4.6.6" />
+    <PackageReference Include="NLog" Version="5.1.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0002" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="all" />
     <PackageReference Include="NGettext" Version="0.6.4" />
@@ -65,6 +65,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Launchpad.Common\Launchpad.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <Target Name="CopyGTK" AfterTargets="Build">
